@@ -1,0 +1,20 @@
+name: update.
+
+on:
+  push:
+  schedule:
+    - cron: "1 1 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+      - uses: actions/setup-go@v1
+        with:
+          go-version: '1.15.4' # The Go version to download (if necessary) and use.
+      - run: go run generate_readme.go
