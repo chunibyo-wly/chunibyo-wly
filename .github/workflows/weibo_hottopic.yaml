@@ -21,6 +21,7 @@ jobs:
       - run: go run generate_readme.go
       - name: Commit files
         run: |
+          git add README.md
           git config --local user.email "chunibyo-wly@gmail.com"
           git config --local user.name "Chunibyo"
           git commit -m "Update today's hot topic on $(date +%Y-%m-%d)" -a
