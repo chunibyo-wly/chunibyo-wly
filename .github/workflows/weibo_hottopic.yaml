@@ -25,7 +25,7 @@ jobs:
           git config --local user.email "chunibyo-wly@gmail.com"
           git config --local user.name "Chunibyo"
           git commit -m "Update today's hot topic on $(date +%Y-%m-%d)" -a
-          - name: Push changes
-            uses: ad-m/github-push-action@master
-            with:
-              github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
