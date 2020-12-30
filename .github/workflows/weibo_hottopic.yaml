@@ -1,9 +1,12 @@
 name: update.
 
+env:
+  TZ: Asia/Shanghai
+
 on:
   push:
   schedule:
-    - cron: "1 1 * * *"
+    - cron: "*/15 10,11,12 * * *"
 
 jobs:
   build:
@@ -22,9 +25,9 @@ jobs:
       - name: Commit files
         run: |
           git add README.md
-          git config --local user.email "chunibyo-wly@gmail.com"
+          git config --local user.email "chunibyo.wly@gmail.com"
           git config --local user.name "Chunibyo"
-          git commit -m "Update today's hot topic on $(date +%Y-%m-%d)" -a
+          git commit -m "Update today's hot topic on $(date)" -a
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:

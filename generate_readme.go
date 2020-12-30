@@ -5,6 +5,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 func Min(x, y int) int {
@@ -47,18 +48,20 @@ func generateREADME(topics []string) {
 	readme := ""
 	for index, topic := range topics {
 		// n. XXX
-		topic = fmt.Sprintf("%d. %s\n", index+1, topic)
+		temp := fmt.Sprintf("%d. %s", index+1, topic)
+		topic = strings.Replace(topic, " ", "%20", -1)
+		temp = temp + "[:link:](https://s.weibo.com/weibo?q=%23" + topic + "%23&Refer=top)\n"
 
 		if index == 10 {
-			topic = fmt.Sprintf("<details>\n<summary>%d ~ %d</summary>\n\n%s", index+1, Min(index+10, len(topics)), topic)
+			temp = fmt.Sprintf("<details>\n<summary>%d ~ %d</summary>\n\n%s", index+1, Min(index+10, len(topics)), temp)
 		} else if index == len(topics)-1 {
-			topic = fmt.Sprintf("%s</details>", topic)
+			temp = fmt.Sprintf("%s</details>", temp)
 		} else if index >= 11 && index%10 == 0 {
-			topic = fmt.Sprintf("</details>\n<details>\n<summary>%d ~ %d</summary>\n\n%s", index+1, Min(index+10, len(topics)), topic)
+			temp = fmt.Sprintf("</details>\n<details>\n<summary>%d ~ %d</summary>\n\n%s", index+1, Min(index+10, len(topics)), temp)
 		} else {
 		}
 
-		readme += topic
+		readme += temp
 	}
 
 	writeStringToFile(readme)
