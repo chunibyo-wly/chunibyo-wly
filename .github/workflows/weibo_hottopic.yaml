@@ -24,7 +24,7 @@ jobs:
           git add README.md
           git config --local user.email "chunibyo.wly@gmail.com"
           git config --local user.name "Chunibyo"
-          git commit -m "Update today's hot topic on $(date)" -a
+          git commit --allow-empty -m "Update today's hot topic on $(date)" -a
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
