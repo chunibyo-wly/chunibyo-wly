@@ -1,12 +1,9 @@
 name: update.
 
-env:
-  TZ: Asia/Shanghai
-
 on:
   push:
   schedule:
-    - cron: "*/15 10,11,12 * * *"
+    - cron: "*/15 2,3 * * *"
 
 jobs:
   build:
